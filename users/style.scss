@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none !important;
+  list-style: none;
+}
+
+header {
+  background-color: rgb(201, 112, 112);
+  nav {
+    ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 50px;
+      li {
+        a {
+          color: white;
+          font-family: "Bruno Ace SC", cursive;
+        }
+      }
+    }
+  }
+  #iconsearch {
+    position: relative;
+    #searchinp {
+      width: 300px;
+      border: none;
+      padding: 5px;
+      border-radius: 10px;
+    }
+    #icon {
+      position: absolute;
+      top: 20%;
+      left: 90%;
+    }
+  }
+}
+.add-edit {
+  h3 {
+    color: rgb(95, 17, 17);
+  }
+  .buttons {
+    button {
+      border: none;
+      padding: 5px 40px 5px 40px;
+      background-color: rgb(201, 112, 112);
+      color: white;
+      font-family: "Bruno Ace SC", cursive;
+      border-radius: 10px;
+    }
+  }
+}

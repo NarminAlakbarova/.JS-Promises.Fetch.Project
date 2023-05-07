@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none !important;
+  list-style: none;
+}
+
+header {
+  background-color: rgb(201, 112, 112);
+}
+header nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}
+header nav ul li a {
+  color: white;
+  font-family: "Bruno Ace SC", cursive;
+}
+header #iconsearch {
+  position: relative;
+}
+header #iconsearch #searchinp {
+  width: 300px;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+}
+header #iconsearch #icon {
+  position: absolute;
+  top: 20%;
+  left: 90%;
+}
+
+.add-edit h3 {
+  color: rgb(95, 17, 17);
+}
+.add-edit .buttons button {
+  border: none;
+  padding: 5px 40px 5px 40px;
+  background-color: rgb(201, 112, 112);
+  color: white;
+  font-family: "Bruno Ace SC", cursive;
+  border-radius: 10px;
+}/*# sourceMappingURL=style.css.map */
