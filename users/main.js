@@ -17,7 +17,7 @@ function drawCards() {
                City:${item.address?.city}
               </p>
               <p>Street:${item.address?.street}</p>
-              <button href="#" class="btn btn-primary" 
+              <button href="#" class="btn btn-primary"  onclick=addtofav("${item.id}") 
                 ><i class="fa-solid fa-heart"></i
               ></button>
               <button href="#" class="btn btn-success"  onclick=editCustomer("${item.id}") 
@@ -46,9 +46,6 @@ function deleteBtn(id) {
 
 let form = document.querySelector("form");
 let inputs = document.querySelectorAll(".formrow input");
-// console.log(inputs[0]);
-let addBtn = document.querySelector("#add");
-let editBtn = document.querySelector("#edit");
 
 function editCustomer(id) {
   editId = id;
@@ -56,15 +53,11 @@ function editCustomer(id) {
   fetch(`https://northwind.vercel.app/api/customers/${id}`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       inputs[0].value = data.companyName;
       inputs[1].value = data.address.street;
       inputs[2].value = data.address.city;
-      // console.log(data.address.city);
-      console.log(inputs[0].value);
     })
     .catch((err) => console.log(err));
-  // console.log(id);
 }
 
 form.addEventListener("submit", function (e) {
@@ -97,3 +90,31 @@ form.addEventListener("submit", function (e) {
     editStatus = false;
   }
 });
+// let search = document.querySelector("#searchinp");
+// search.addEventListener("input", function (event) {
+//   fetch(`https://northwind.vercel.app/api/customers/`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       let filteredData = data.filter((item) => {
+//         return item.companyName
+//           .toLocaleLowerCase()
+//           .includes(event.target.value.toLocaleLowerCase());
+//       });
+//       drawCards(filteredData);
+//     });
+// });
+let favCard = JSON.parse(localStorage.getItem("FavCustomers")) ?? [];
+function addtofav(id) {
+  fetch(`https://northwind.vercel.app/api/customers/${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let selectedObj = favCard.find((obj) => obj.id == id);
+      favCard.includes(selectedObj);
+      if (!favCard.includes(selectedObj)) {
+        favCard.push(data);
+        localStorage.setItem("FavCustomers", JSON.stringify(favCard));
+      } else {
+        alert("You have already added this customer!");
+      }
+    });
+}
