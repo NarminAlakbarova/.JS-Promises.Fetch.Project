@@ -90,19 +90,23 @@ form.addEventListener("submit", function (e) {
     editStatus = false;
   }
 });
-// let search = document.querySelector("#searchinp");
-// search.addEventListener("input", function (event) {
-//   fetch(`https://northwind.vercel.app/api/customers/`)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       let filteredData = data.filter((item) => {
-//         return item.companyName
-//           .toLocaleLowerCase()
-//           .includes(event.target.value.toLocaleLowerCase());
-//       });
-//       drawCards(filteredData);
-//     });
-// });
+let search = document.querySelector("#searchinp");
+search.addEventListener("input", function (event) {
+  fetch(`https://northwind.vercel.app/api/customers/`)
+    .then((response) => response.json())
+    .then((data) => {
+      let filteredData = data.filter((item) => {
+        return (
+          item.companyName &&
+          item.companyName
+            .toLocaleLowerCase()
+            .includes(event.target.value.toLocaleLowerCase())
+        );
+      });
+      drawCards(filteredData);
+    });
+});
+
 let favCard = JSON.parse(localStorage.getItem("FavCustomers")) ?? [];
 function addtofav(id) {
   fetch(`https://northwind.vercel.app/api/customers/${id}`)

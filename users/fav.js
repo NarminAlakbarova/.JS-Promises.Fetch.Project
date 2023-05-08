@@ -1,6 +1,7 @@
 let fav = JSON.parse(localStorage.getItem("FavCustomers")) ?? [];
 let row = document.querySelector(".cardrow");
 function drawCard() {
+  row.innerHTML = "";
   fav.forEach((item) => {
     row.innerHTML += `
         
@@ -13,7 +14,7 @@ function drawCard() {
             </p>
             <p>Street:${item.address?.street}</p>
        
-            <button href="#" class="btn btn-danger"  id=${item.id} onclick=removeCard(${item.id},this)
+            <button href="#" class="btn btn-danger"  id=${item.id} onclick=removeCard("${item.id}",this)
               ><i class="fa-solid fa-trash"></i
             ></button>
           </div>
@@ -26,9 +27,9 @@ function drawCard() {
 }
 drawCard();
 
- function removeCard(id,button){
-    fav=fav.filter((obj)=>obj.id!=id)
-    localStorage.setItem("FavCustomers",JSON.stringify(fav))
-    button.closest("span").remove()
-   drawCard()
- }
+function removeCard(id, button) {
+  fav = fav.filter((obj) => obj.id != id);
+  localStorage.setItem("FavCustomers", JSON.stringify(fav));
+  button.closest("span").remove();
+  drawCard();
+}
