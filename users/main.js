@@ -1,12 +1,17 @@
+
 let row = document.querySelector(".cardrow");
 let editStatus = false;
 let editId = null;
+let filteredData = []
+let copyData = []
 function drawCards() {
   row.innerHTML = "";
   fetch("https://northwind.vercel.app/api/customers")
     .then((response) => response.json())
-    .then((data) =>
-      data.forEach((item) => {
+    .then((data) => {
+      copyData = data
+      filteredData = search.value ? filteredData : data
+      filteredData.forEach((item) => {
         row.innerHTML += `
         
         <span class="col col-3 ">
@@ -32,6 +37,7 @@ function drawCards() {
         
         `;
       })
+    }
     );
 }
 drawCards();
@@ -91,20 +97,17 @@ form.addEventListener("submit", function (e) {
   }
 });
 let search = document.querySelector("#searchinp");
+
 search.addEventListener("input", function (event) {
-  fetch(`https://northwind.vercel.app/api/customers/`)
-    .then((response) => response.json())
-    .then((data) => {
-      let filteredData = data.filter((item) => {
-        return (
-          item.companyName &&
-          item.companyName
-            .toLocaleLowerCase()
-            .includes(event.target.value.toLocaleLowerCase())
-        );
-      });
-      drawCards(filteredData);
-    });
+  filteredData = copyData
+  filteredData = filteredData.filter((item) => {
+    return (
+      item.companyName
+        .toLocaleLowerCase()
+        .includes(event.target.value.toLocaleLowerCase())
+    );
+  });
+  drawCards()
 });
 
 let favCard = JSON.parse(localStorage.getItem("FavCustomers")) ?? [];
@@ -122,3 +125,4 @@ function addtofav(id) {
       }
     });
 }
+
